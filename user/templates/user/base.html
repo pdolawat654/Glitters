@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Glitters - {{ title }}</title>
+    {% else %}
+    <title> Glitters </title>
+    {% endif %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user/main.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <h3>Glitters</h3>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+        </ul>
+    
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
+    </nav>
+    {% block content %}
+
+    {% endblock content %}
+</body>
+</html>
+<script>
+    const navSlide=()=>{
+        const burger=document.querySelector('.burger');
+        const navLinks=document.querySelectorAll('.nav-links li');
+        const nav=document.querySelector('.nav-links');
+
+
+        burger.addEventListener('click',()=>{
+            //Toggle nav
+            nav.classList.toggle("nav-active");
+            //Animate Links
+            navLinks.forEach((link,index)=>{
+                if(link.style.animation){
+                    link.style.animation="";
+                }
+                else{
+                    link.style.animation=`navLinkFade 0.5s ease forwards ${index/7+0.5}s`;
+                }
+            });
+            //Burger animation
+            burger.classList.toggle('toggle')
+        });
+
+
+        
+    }
+    navSlide();
+</script>

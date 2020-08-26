@@ -1,6 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import UserSerializer
+from django.contrib.auth.models import User
 
 # Create your views here.
+
+@api_view(['GET'])
 def home(request):
-    return render(request,"user/login.html")
+    a={
+        '1':"hjdsf",
+        '2':"hjdsf",
+        '3':"hjdsf",
+        '4':"hjdsf",
+        '5':"hjdsf",
+    }
+    return Response(a)
+
+@api_view(['GET'])
+def userList(request):
+    users=User.objects.all()
+    serializer=UserSerializer(users,many=True)
+    return Response(serializer.data)
